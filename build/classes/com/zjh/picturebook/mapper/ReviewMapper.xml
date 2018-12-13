@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjh.picturebook.mapper.ReviewMapper" >
+  <resultMap id="BaseResultMap" type="com.zjh.picturebook.entity.Review" >
+    <result column="chatid" property="chatid" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectre" parameterType="String" resultMap="BaseResultMap" >
+  select * from review
+  where chatid = #{0}
+  </select>
+  <insert id="insert" parameterType="com.zjh.picturebook.entity.Review" >
+    insert into review (chatid, userid, type
+      )
+    values (#{chatid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjh.picturebook.entity.Review" >
+    insert into review
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chatid != null" >
+        chatid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chatid != null" >
+        #{chatid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

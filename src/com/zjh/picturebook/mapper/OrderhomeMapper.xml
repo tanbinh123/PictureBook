@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjh.picturebook.mapper.OrderhomeMapper" >
+  <resultMap id="BaseResultMap" type="com.zjh.picturebook.entity.Orderhome" >
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="bookid" property="bookid" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectbyuserid" resultMap="BaseResultMap">
+  select * from orderhome
+  where userid = #{userid}
+  </select>
+  <delete id="delete" parameterType="String">
+  delete from orderhome
+  where userid = #{0} and bookid = #{1}
+  </delete>
+  <insert id="insert" parameterType="com.zjh.picturebook.entity.Orderhome" >
+    insert into orderhome (userid, bookid, type
+      )
+    values (#{userid,jdbcType=VARCHAR}, #{bookid,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjh.picturebook.entity.Orderhome" >
+    insert into orderhome
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="bookid != null" >
+        bookid,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="bookid != null" >
+        #{bookid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

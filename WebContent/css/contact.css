@@ -1,0 +1,44 @@
+@charset "utf-8";
+{
+	border: 1px solid #999;
+}
+body{
+	background-repeat: no-repeat;
+	background-position: center top;
+	font-family: "微软雅黑";
+}
+
+#contact{
+	width:450px;
+	height:500px;
+	margin:50px auto;
+
+}
+#contact #cd{
+	font-size: 25px;
+	width:400px;
+	height:50px;
+	margin-top:10px;
+
+	
+}
+#contact #cd1{
+	width:350px;
+	height:250px;
+	margin-left:80px
+}
+input{
+	width:300px;
+	height:30px;
+	
+}
+#sub{
+	width:80px;
+	height:50px;
+	margin-left:225px;
+	font-family: "微软雅黑";
+	font-color:white;
+	font-size:20px;
+	background-color: white;
+	border: 1px solid #999;
+}

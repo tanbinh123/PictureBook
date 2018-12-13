@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjh.picturebook.mapper.BookMapper" >
+  <resultMap id="BaseResultMap" type="com.zjh.picturebook.entity.Book" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="athor" property="athor" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="page" property="page" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, content, athor, type, page
+  </sql>
+  <select id="seachpb" resultMap="BaseResultMap" parameterType="java.lang.String">
+  select * from book
+  where type = 'picture' and name like concat('%',#{0},'%')
+  </select>
+  <select id="selectpicture" resultMap="BaseResultMap">
+  select * from book
+  where type = 'picture'
+  </select>
+  <select id="selectbook" resultMap="BaseResultMap">
+  select * from book
+  where type = 'book'
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from book
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjh.picturebook.entity.Book" >
+    insert into book (id, name, content, 
+      athor, type, page)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{athor,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{page,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjh.picturebook.entity.Book" >
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="athor != null" >
+        athor,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="page != null" >
+        page,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="athor != null" >
+        #{athor,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="page != null" >
+        #{page,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjh.picturebook.entity.Book" >
+    update book
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="athor != null" >
+        athor = #{athor,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="page != null" >
+        page = #{page,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjh.picturebook.entity.Book" >
+    update book
+    set name = #{name,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      athor = #{athor,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      page = #{page,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
